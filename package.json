@@ -1,0 +1,31 @@
+{
+  "name": "product-management-challenge",
+  "description": "",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev:backend": "nodemon",
+    "dev:frontend": "cd ./frontend && npm run dev",
+    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
+    "build:backend": "tsc",
+    "build:frontend": "cd ./frontend && npm run build",
+    "build": "tsc && npm run build:frontend",
+    "build-and-run": "npm run build && npm run start",
+    "start": "node dist/index.js"
+  },
+  "keywords": [],
+  "author": "Adrian Roger",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "5.0.0",
+    "@types/node": "22.10.5",
+    "concurrently": "^9.1.2",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "typescript": "5.7.2"
+  },
+  "dependencies": {
+    "dotenv": "16.4.7",
+    "express": "^5.0.1"
+  }
+}
