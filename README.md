@@ -2,7 +2,7 @@
 
 ### Tecnologias
 
-- **Banco de Dados**: SQLite
+- **Banco de Dados**: SQLite3
 - **Back-end**: Express, TypeScript
 - **Front-end**: React, CSS
 

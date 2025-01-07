@@ -17,6 +17,7 @@
   "author": "Adrian Roger",
   "license": "ISC",
   "devDependencies": {
+    "@types/better-sqlite3": "^7.6.12",
     "@types/express": "5.0.0",
     "@types/node": "22.10.5",
     "concurrently": "^9.1.2",
@@ -25,6 +26,7 @@
     "typescript": "5.7.2"
   },
   "dependencies": {
+    "better-sqlite3": "^11.7.2",
     "dotenv": "16.4.7",
     "express": "^5.0.1"
   }
