@@ -49,6 +49,11 @@ export default class Db {
     return row as IProduct
   }
 
+  public getProductsByPartialName(partialName: string): IProduct[] {
+    const sql = `SELECT * FROM products WHERE product_name LIKE ? COLLATE NOCASE`;
+    return this.db.prepare(sql).all(`%${partialName}%`) as IProduct[];
+  }
+
   public getAllProducts(): IProduct[] {
     const sql = `SELECT * FROM products`;
     const rows = this.db.prepare(sql).all();
