@@ -30,12 +30,12 @@ export default class Db {
     };
 
     this.db.prepare(createProductTable).run();
-    if (process.env.NODE_ENV === "dev") {
-      this.clearTable();
+    const seeded = this.getAllProducts();
+    if (process.env.NODE_ENV === "dev" && seeded.length < 1) {
       this.createProduct(params);
-      console.log("Database cleared and seeded for development.");
+      console.log(":: Dev database seeded for development. ::");
     } else {
-      console.log(`Table 'products' checked/created.`);
+      console.log(`:: Table 'products' checked/created. ::`);
     }
   }
 
@@ -95,10 +95,5 @@ export default class Db {
     }
 
     return `Product with ID ${id} deleted successfully.`;
-  }
-
-  public clearTable(): void {
-    const sql = `DELETE FROM products`;
-    this.db.prepare(sql).run();
   }
 }
