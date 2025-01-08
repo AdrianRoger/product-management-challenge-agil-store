@@ -1,8 +1,8 @@
 import express, { Express, Request, Response } from "express";
 import { config } from "dotenv";
 import path from "path";
-// import Database from "./database/Database";
 import Db from "./database/Db";
+import { errorMiddleware } from "./middlewares/errorMiddleware";
 import router from "./routes/Routes";
 
 export default class Server {
@@ -13,6 +13,14 @@ export default class Server {
   constructor() {
     this.app = express();
     this.database = new Db();
+  }
+
+  private initialize(): void {
+    this.configEnvironment();
+    this.configDatabase();
+    this.configMiddlewares();
+    this.configRoutes();
+    this.app.use(errorMiddleware as express.ErrorRequestHandler);
   }
 
   private configDatabase(): void{
@@ -33,7 +41,9 @@ export default class Server {
     this.app.use(express.json());
   }
   
-  private configStaticFiles(): void {
+  private configRoutes(): void {
+    this.app.use('/api', router);
+
     const buildPath = path.join(__dirname, "../build");
     this.app.use(express.static(buildPath));
     
@@ -42,14 +52,8 @@ export default class Server {
     });
   }
   
-  public async start(): Promise<void>{
-    this.configEnvironment();
-    this.configMiddlewares();
-    await this.configDatabase();
-
-    this.app.use('/api', router);
-
-    this.configStaticFiles();
+  public start(): void{
+    this.initialize();
 
     this.app.listen(this.port, () => {
         console.log(`Server running on http://localhost:${this.port}`);
