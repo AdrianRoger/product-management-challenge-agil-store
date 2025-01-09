@@ -4,6 +4,7 @@ import path from "path";
 import Db from "./database/Db";
 import { errorMiddleware } from "./middlewares/errorMiddleware";
 import router from "./routes/router";
+import cors from "cors";
 
 export default class Server {
   private app: Express;
@@ -23,7 +24,7 @@ export default class Server {
     this.app.use(errorMiddleware as express.ErrorRequestHandler);
   }
 
-  private configDatabase(): void{
+  private configDatabase(): void {
     try {
       this.database.initTables();
     } catch (error) {
@@ -39,25 +40,25 @@ export default class Server {
 
   private configMiddlewares(): void {
     this.app.use(express.json());
+    this.app.use(cors());
   }
-  
+
   private configRoutes(): void {
-    this.app.use('/api', router);
+    this.app.use("/api", router);
 
     const buildPath = path.join(__dirname, "../build");
     this.app.use(express.static(buildPath));
-    
+
     this.app.get(/.*/, (req: Request, res: Response) => {
       res.sendFile(path.resolve(buildPath, "index.html"));
     });
   }
-  
-  public start(): void{
+
+  public start(): void {
     this.initialize();
 
     this.app.listen(this.port, () => {
-        console.log(`Server running on http://localhost:${this.port}`);
+      console.log(`Server running on http://localhost:${this.port}`);
     });
   }
 }
-
