@@ -42,11 +42,11 @@ export default class Db {
   public getProductById(id: number): IProduct | null {
     const sql = `SELECT * FROM products WHERE id = ?`;
     const row = this.db.prepare(sql).get(id);
-    if(!row){
-      return null
+    if (!row) {
+      return null;
     }
-    
-    return row as IProduct
+
+    return row as IProduct;
   }
 
   public getProductsByPartialName(partialName: string): IProduct[] {
@@ -79,21 +79,21 @@ export default class Db {
         WHERE id = ?`;
 
     const result = this.db.prepare(sql).run(Object.values(data));
-    
-    if(result.changes === 0){
-      return null
+
+    if (result.changes === 0) {
+      return null;
     }
 
     return data;
   }
 
-  public deleteById(id: number): string | null {
+  public deleteById(id: number): object | null {
     const sql = `DELETE FROM products WHERE id = ?`;
     const result = this.db.prepare(sql).run(id);
-    if(result.changes === 0){
-      return null
+    if (result.changes === 0) {
+      return null;
     }
 
-    return `Product with ID ${id} deleted successfully.`;
+    return { message: `Product with ID ${id} deleted successfully.` };
   }
 }
