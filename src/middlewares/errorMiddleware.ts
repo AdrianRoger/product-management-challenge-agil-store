@@ -9,6 +9,7 @@ export const errorMiddleware = (
 ): Response | void  => {
   if (err instanceof CustomError) {
     return res.status(err.status).json({
+      status: err.status,
       data: null,
       error: err.message,
     });
@@ -17,5 +18,5 @@ export const errorMiddleware = (
   if (process.env.NODE_ENV === "dev")
     console.log(`:: DevMode Error Log ::\nError >> ${err}`);
 
-  return res.status(500).json({ data: null, error: "Internal server error" });
+  return res.status(500).json({status: 500, data: null, error: "Internal server error" });
 };
