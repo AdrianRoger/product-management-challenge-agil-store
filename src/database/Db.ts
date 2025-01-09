@@ -1,5 +1,5 @@
 import Database, { RunResult } from "better-sqlite3";
-import { IProduct } from "../interfaces/Interfaces";
+import { IProduct } from "../interfaces/interface";
 import { config } from "dotenv";
 import { getDatabasePath } from "../config/configDatabase";
 

@@ -3,7 +3,7 @@ import { config } from "dotenv";
 import path from "path";
 import Db from "./database/Db";
 import { errorMiddleware } from "./middlewares/errorMiddleware";
-import router from "./routes/Routes";
+import router from "./routes/router";
 
 export default class Server {
   private app: Express;
