@@ -62,23 +62,24 @@ export default class Db {
   }
 
   public createProduct(data: IProduct): IProduct | null {
-    const sql = `INSERT INTO products (product_name, category, stock, price) VALUES (?, ?, ?, ?)`;
+    const sql = `INSERT INTO products (product_name, category, stock, price) 
+        VALUES (@product_name, @category, @stock, @price)`;
     const result: RunResult = this.db
       .prepare(sql)
-      .run([data.product_name, data.category, data.stock, data.price]);
+      .run(data);
 
     return this.getProductById(Number(result.lastInsertRowid));
   }
 
   public updateProduct(data: IProduct): IProduct | null {
     const sql = `UPDATE products 
-        SET product_name = ?, 
-        category = ?, 
-        stock = ?, 
-        price = ? 
-        WHERE id = ?`;
+        SET product_name = @product_name, 
+        category = @category, 
+        stock = @stock, 
+        price = @price 
+        WHERE id = @id`;
 
-    const result = this.db.prepare(sql).run(Object.values(data));
+    const result = this.db.prepare(sql).run(data);
 
     if (result.changes === 0) {
       return null;
