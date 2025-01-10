@@ -18,8 +18,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ListIcon from '@mui/icons-material/List';
-
-
+import SearchIcon from '@mui/icons-material/Search';
 
 const drawerWidth = 240;
 
@@ -140,6 +139,14 @@ export default function PersistentDrawerLeft({children}) {
                   <ListIcon />
                 </ListItemIcon>
                 <ListItemText primary="Produtos" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton component={Link} to="/search">
+                <ListItemIcon>
+                  <SearchIcon />
+                </ListItemIcon>
+                <ListItemText primary="Buscar" />
               </ListItemButton>
             </ListItem>
         </List>

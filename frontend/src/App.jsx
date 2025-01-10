@@ -1,8 +1,7 @@
-import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import PersistentDrawerLeft from "./components/persistentDrawertLeft";
 import ProductList from "./components/productList";
-import { getProducts } from "./services/api";
+import SearchProducts from "./components/searchProducts";
 
 import "./App.css";
 
@@ -12,6 +11,7 @@ function App() {
     <PersistentDrawerLeft>
       <Routes>
         <Route index path="/" element={<ProductList />} />
+        <Route index path="/search" element={<SearchProducts />} />
       </Routes>
     </PersistentDrawerLeft>
   );
