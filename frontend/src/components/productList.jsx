@@ -24,7 +24,6 @@ import {
   getProducts,
   updateProduct,
 } from "../services/api";
-import e from "cors";
 
 const ProductList = () => {
   const [list, setList] = useState();
@@ -196,7 +195,7 @@ const ProductList = () => {
 
   return (
     <Box>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between'}}>
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
         <Button sx={{ mr: 1 }} variant="contained" onClick={handleClickOpen}>
           <AddIcon fontSize="medium" sx={{ mr: 1 }} />
           cadastrar produto
@@ -207,12 +206,13 @@ const ProductList = () => {
             sx={{ display: "inline-block", width: '300px' }}
             id="categoria"
             onInputChange={(e, value) => handleFilterCategory(value)}
+            size="small"
             disableClearable
             options={[...new Set(list.map((option) => option.category))]} 
             renderInput={(params) => (
               <TextField
                 {...params}
-                label="Filtar categoria"
+                label="Filtrar categoria"
                 slotProps={{
                   input: {
                     ...params.InputProps,
