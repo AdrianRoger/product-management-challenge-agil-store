@@ -16,21 +16,33 @@ export const getProducts = async () => {
 };
 
 export const getProductById = async (id) => {
-  return await fetch(`${API_URL}${id}`, {
+  const response = await fetch(`${API_URL}${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   }).then((res) => res.json());
+
+  if (response.error) {
+    return response;
+  }
+
+  return response.data;
 };
 
 export const getProductsByPatialName = async (product_name) => {
-  return await fetch(`${API_URL + "search?product_name=" + product_name}`, {
+  const response = await fetch(`${API_URL + "search?product_name=" + product_name}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
     },
   }).then((res) => res.json());
+
+  if (response.error) {
+    return response;
+  }
+
+  return response.data;
 };
 
 export const createProduct = async (product) => {
