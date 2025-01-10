@@ -177,29 +177,35 @@ const SearchProducts = () => {
     }
 
     const result = await getProductById(id);
+    console.log(result)
     if (result.error) {
       setError(sanitizeErrorMessage(result.error));
+      return setLoadingData(false);
     }
     setLoadingData(false);
 
     setList([result]);
+    setError('')
   };
 
   const fetchDataByName = async () => {
+    console.log('cliqued', searchByPartialName)
     setSearchById("");
     setLoadingData(true);
 
     const result = await getProductsByPatialName(searchByPartialName.trim());
-
+    console.log(result.length)
     if (result.error) {
       setError(sanitizeErrorMessage(result.error));
     }
 
     if (result.length === 0) {
       setError(`Nenhum produto para a busca '${searchByPartialName.trim()}'`);
+      return  setLoadingData(false);
     }
     setLoadingData(false);
     setList(result);
+    setError('')
   };
 
   const clearData = () => {
